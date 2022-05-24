@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- นายพีรพัฒน์ สุริยะพรม -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-js-hi-low.html</title>
+</head>
+<body>
+    Input Number : <input type="text" name="" id="num1">
+    <br>
+    <button onclick="high_low()">Submit</button>
+    <br>
+    <br>
+    <p id="output"></p>
+    <script>
+        function high_low() {
+            if (Number(document.getElementById('num1').value) < 50) {
+                document.getElementById('output').innerHTML = 'LOW'
+            }else {
+                document.getElementById('output').innerHTML = 'HIGH'
+            }
+        }
+    </script>
+</body>
+</html>
