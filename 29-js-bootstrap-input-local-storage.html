@@ -25,11 +25,20 @@
             position: relative;
         }
     </style>
-    
+    <script>
+        let sid = []
+        let name = []
+        let phon = []
+        let l_sid = []
+        let l_name = []
+        let l_phon = []
+        let show_data = ''
+    </script>
    
-    <title>23-js-bootstrap-form.html</title>
+    <title>29-js-bootstrap-input-local-storage.html</title>
 </head>
-<body style="background-image: url(https://media.istockphoto.com/vectors/abstract-black-stripes-diagonal-background-vector-id1294603953?b=1&k=20&m=1294603953&s=612x612&w=0&h=OY80JdaVWxIq8V7CHDc7e3jZRRjd38KZ4mEBoBVrz_4=)">
+<body style="background-image: url(https://media.istockphoto.com/vectors/abstract-black-stripes-diagonal-background-vector-id1294603953?b=1&k=20&m=1294603953&s=612x612&w=0&h=OY80JdaVWxIq8V7CHDc7e3jZRRjd38KZ4mEBoBVrz_4=)"
+>
     <div class="jumbotron jumbotron-fluid mb-0" >
         <video src="https://cdn.videvo.net/videvo_files/video/free/2016-05/large_watermarked/506401051_1_preview.mp4" autoplay="true" loop="true" muted="true"></video>
         
@@ -78,7 +87,7 @@
     <div class="container mt-4">
        <div class="row">
            <div class="col-sm-6">
-            <div class="card" style="width: 30rem; height: 30rem;">
+            <div class="card" style="width: 30rem; height: 32rem;">
                 <!-- <img src="..." class="card-img-top" alt="..."> -->
                 <div class="alert alert-dark h3" role="alert">
                     บันทึกข้อมูลนักเรียน
@@ -86,71 +95,85 @@
                 <div class="card-body">
                 <!-- <h5 class="card-title">Card title</h5> -->
                 <p class="card-text">
-                    <form>
                         <div class="form-group">
                           <label for="GroupSID">รหัส</label>
-                          <input type="text" class="form-control" id="formGroupSID">
+                          <input type="text" class="form-control"name="fSID" id="fSID">
                         </div>
                         <div class="form-group">
                           <label for="GroupName">ชื่อ-สกุล</label>
-                          <input type="text" class="form-control" id="formGroupName">
+                          <input type="text" class="form-control"name="fName" id="fName">
                         </div>
                         <div class="form-group">
                             <label for="GroupPhon">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" id="formGroupPhon">
+                            <input type="text" class="form-control"name="fPhon" id="fPhon">
                           </div>
-                      </form>
-                      <button  type="button" onclick="input()" on class="btn btn-outline-dark w-25" >บันทึก</button>
-                </p>
+                      <button  type="button" onclick="set_array()"  on class="btn btn-outline-dark w-auto" >บันทึก</button>
+                      <button  type="button" onclick="clear_input()" on class="btn btn-dark w-auto" >reset</button>
+                      <button  type="button" onclick="Clear_Storage()" on class="btn btn-outline-primary w-auto" >Clear Storage</button>
+                    </p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <p id="output"></p>
                 </div>
               </div>
            </div>
         
-           <div class="col-sm-6">
-            <div class="card " style="width: 30rem; height: 30rem;">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
-                <div class="alert alert-dark h3" role="alert">
-                    แสดงข้อมูลนักเรียน
-                </div>
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5> -->
-                  <p class="card-text">
-              <script>
-                      function input() {
-                       document.getElementById('SID').innerHTML = 
-                       (document.getElementById('formGroupSID').value)
-                       
-                       document.getElementById('Name').innerHTML =
-                       document.getElementById('formGroupName').value
-                  
-                       document.getElementById('Phon').innerHTML =
-                       document.getElementById('formGroupPhon').value
-                      }
-              </script>
-               <div class="alert alert-dark" role="alert" >
-                    <text id ="SID">รหัส</text>
-                </div>
-                  <br>
-                  <br>
-                  <div class="alert alert-dark" role="alert">
-                    <text id='Name'>ชื่อ-สกุล</text>
-                  </div>
-                  <br>
-                  <br>
-                  <div class="alert alert-dark" role="alert">
-                    <text id='Phon'>เบอร์โทรศัพท์</text>
-                  </div>
-                </p>
-                       
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                </div>
-              </div>
-           </div>
+           
         </div>
         </div> 
     </div>
+        <script>
+            function Clear_Storage() {
+                localStorage.clear()
+            }
 
+            function clear_input() {
+                document.getElementById('fSID').value = ''
+                document.getElementById('fName').value = ''
+                document.getElementById('fPhon').value = ''
+            }
+
+            function get_data() {
+                document.getElementById('output').innerHTML = localStorage.getItem('sid') + ' '
+                + localStorage.getItem('name') + ' ' + localStorage.getItem('phon')
+                
+                
+            }
+
+            function set_data() {
+                localStorage.setItem('sid', document.getElementById('fSID').value)
+                localStorage.setItem('name',document.getElementById('fName').value)
+                localStorage.setItem('phon',document.getElementById('fPhon').value)
+                clear_input()
+                get_data()
+            }
+
+            function set_array() {
+              sid.push(document.getElementById('fSID').value)
+              name.push(document.getElementById('fName').value)
+              phon.push(document.getElementById('fPhon').value)
+            //   console.log(sid)
+            //   console.log(name)
+            //   console.log(phon)
+              localStorage.setItem('sid', JSON.stringify(sid))
+              localStorage.setItem('name',JSON.stringify(name))
+              localStorage.setItem('phon',JSON.stringify(phon))
+              clear_input()
+              get_data()
+              get_array()
+            }
+
+            function get_array() {
+                l_sid = JSON.parse(localStorage.getItem('sid'))
+                l_name = JSON.parse(localStorage.getItem('name'))
+                l_phon = JSON.parse(localStorage.getItem('phon'))
+                //console.log(l_sid)
+                for (let i = 0; i < l_sid.length; i++) {
+                    show_data += l_sid[i] + ' ' + l_name[i] + ' ' + l_phon[i] + '<br>'
+                    document.getElementById('output').innerHTML = show_data
+                }
+                show_data = '' 
+            }
+        </script>
     
       
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
